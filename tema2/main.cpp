@@ -82,9 +82,38 @@ class Book: public Document{
     private:
         std::string title;
 };
+class EMail: public Document{
+    public:
+        EMail(Author a)
+        :Document(a),
+         subject(),
+         to()
+        {}
+
+        ~EMail(){}
+
+        void setSubject(std::string s){ subject = s; }
+        void setTo(std::string t){ to = t; }
+        std::string getSubject(){ return subject; }
+        std::string getTo(){ return to; }
+    private:
+        std::string subject;
+        std::string to;
+        //cannot copy an EMail
+        EMail(const EMail&);
+        EMail operator=(const EMail&);
+};
 
 
 int main()
 {
-    
+   Author a1("George Orwell", "british", 1903);
+    Book b1(a1, "1984");
+    b1.setYear(1949);
+    Book b2(b1);
+    Book b3 = Book(b1);
+
+    cout<<"Book 1:\nAuthor:\t"<<b1.getAuthor()<<"\ntitle\t"<<b1.getTitle()<<"\nPublishing year\t"<<b1.getYear()<<endl<<endl;
+    cout<<"Book 2:\nAuthor:\t"<<b2.getAuthor()<<"\ntitle\t"<<b2.getTitle()<<"\nPublishing year\t"<<b2.getYear()<<endl<<endl;
+    cout<<"Book 3:\nAuthor:\t"<<b3.getAuthor()<<"\ntitle\t"<<b3.getTitle()<<"\nPublishing year\t"<<b3.getYear()<<endl<<endl; 
 }
