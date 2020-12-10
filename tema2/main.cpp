@@ -40,7 +40,7 @@ class Document{
         Document& operator=(const Document& rhs){
             Author *aOrig = author;
             author = new Author(*rhs.author);
-            delete(aOrig);
+            delete aOrig;
             return *this;
         }
 
@@ -82,6 +82,7 @@ class Book: public Document{
     private:
         std::string title;
 };
+
 class EMail: public Document{
     public:
         EMail(Author a)
@@ -107,7 +108,7 @@ class EMail: public Document{
 
 int main()
 {
-   Author a1("George Orwell", "british", 1903);
+    Author a1("George Orwell", "british", 1903);
     Book b1(a1, "1984");
     b1.setYear(1949);
     Book b2(b1);
